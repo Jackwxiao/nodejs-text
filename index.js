@@ -31,6 +31,16 @@ var server = http.createServer(function(request, response){
     response.setHeader('Content-Type', 'application/javascript')
     response.write(string)
 	  response.end()
+  }else if(path==='/pay'){
+    let amount = fs.readFileSync('./db','utf8')
+    amount -=1
+    fs.writeFileSync('./db',amount)
+    let callbackName = query.callback
+    response.setHeader('Content-Type','application/javascript')
+    response.write(`
+    ${callbackName}.call(undefined,'success')
+    `)
+    response.end()
   }else{  
     response.statusCode = 404
     response.setHeader('Content-Type', 'text/html;charset=utf-8') 
