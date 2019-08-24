@@ -31,14 +31,20 @@ var server = http.createServer(function(request, response){
     response.setHeader('Content-Type', 'application/javascript')
     response.write(string)
 	  response.end()
-  }else if(path==='/pay'){
-    let amount = fs.readFileSync('./db','utf8')
-    amount -=1
-    fs.writeFileSync('./db',amount)
-    let callbackName = query.callback
-    response.setHeader('Content-Type','application/javascript')
+  }else if(path==='/xxx'){
+    response.statusCode = 200
+    
+    response.setHeader('Content-Type','text/json;charset=utf-8')
+    response.setHeader('Access-Control-Allow-Origin','http://frank.com:8001')
     response.write(`
-    ${callbackName}.call(undefined,'success')
+    {
+      "note":{
+        "to":"小谷",
+        "from":"方方",
+        "heading":"打招呼",
+        "content":"hi"
+      }
+    }
     `)
     response.end()
   }else{  

@@ -2,36 +2,4 @@
 <link rel="stylesheet" href="/style.css">
 <h5>您的账户余额是 <span id="amount">&&&amount&&&</span></h5>
 <button id="button">点我付款1元</button>
-<script>
-  button.addEventListener('click', (e) => {
-    let script = document.createElement('script')
-    let functionName = 'frank' + parseInt(Math.random() * 10000000, 10)
-    window[functionName] = function () {
-      amount.innerText = amount.innerText - 0 - 1
-    }
-    script.src = 'http://xw2.com:8002/pay?callback=' + functionName
-    document.body.appendChild(script)
-    script.onload = function (e) {   //状态码是 200~299 则表示成功
-      e.currentTarget.remove()
-      delete window[functionName]  //请求完删除随机函数
-    }
-    script.onerror = function (e) {  //状态码大于等于 400 则失败
-      e.currentTarget.remove()
-      delete window[functionName]
-    }
-  })
-</script>
-<!-- <script src="/main.js?callback=xxx"></script> -->
-<!-- 第6行到第21行可以在引入jQuery之后可改写为：
-     $.ajax({
- url: "http://xw2.com:8002/pay",
- dataType: "jsonp",
- success: function( response ) {
-     if(response === 'success'){
-     amount.innerText = amount.innerText - 1
-     }
- }
- })
-
- $.jsonp()
--->
+<script src="./main.js"></script>
