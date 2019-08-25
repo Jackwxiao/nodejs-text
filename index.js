@@ -33,7 +33,6 @@ var server = http.createServer(function(request, response){
 	  response.end()
   }else if(path==='/xxx'){
     response.statusCode = 200
-    
     response.setHeader('Content-Type','text/json;charset=utf-8')
     response.setHeader('Access-Control-Allow-Origin','http://frank.com:8001')
     response.write(`
@@ -50,7 +49,11 @@ var server = http.createServer(function(request, response){
   }else{  
     response.statusCode = 404
     response.setHeader('Content-Type', 'text/html;charset=utf-8') 
-    response.write('找不到对应的路径，你需要自行修改 index.js')
+    response.write(`
+    {
+      "error":"not found"
+    }
+    `)
 	  response.end()
   }
 
